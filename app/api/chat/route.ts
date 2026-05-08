@@ -1,10 +1,10 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
 
-// CẤU HÌNH BẮT BUỘC ĐỂ CHẠY Ở SINGAPORE
+// CẤU HÌNH CHO VÙNG SAN FRANCISCO (SFO1)
 export const runtime = 'nodejs';
-export const preferredRegion = 'sin1';
-export const dynamic = 'force-dynamic'; 
+export const preferredRegion = 'sfo1';
+export const dynamic = 'force-dynamic';
 
 const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey || "");
@@ -20,7 +20,6 @@ export async function POST(request: NextRequest) {
 
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    // Sử dụng Jason AI để trả lời
     const prompt = `Bạn là Jason AI, một trợ lý phân tích tài chính thông minh và thân thiện. 
     Hãy trả lời bằng tiếng Việt chuyên nghiệp: ${userMessage}`;
 
