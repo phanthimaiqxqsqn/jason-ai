@@ -1,9 +1,4 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "regions": ["sin1"],
-  "functions": {
-    "app/api/chat/route.ts": {
-      "regions": ["sin1"]
-    }
-  }
+  "regions": ["iad1"]
 }
