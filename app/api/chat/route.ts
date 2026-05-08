@@ -1,11 +1,11 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
 
-// ÉP VERCEL CHẠY Ở SINGAPORE ĐỂ TRÁNH LỖI 403
-export const runtime = 'nodejs'; 
+// CẤU HÌNH BẮT BUỘC ĐỂ CHẠY Ở SINGAPORE
+export const runtime = 'nodejs';
 export const preferredRegion = 'sin1';
+export const dynamic = 'force-dynamic'; 
 
-// Khởi tạo Google AI
 const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey || "");
 
@@ -20,6 +20,7 @@ export async function POST(request: NextRequest) {
 
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
+    // Sử dụng Jason AI để trả lời
     const prompt = `Bạn là Jason AI, một trợ lý phân tích tài chính thông minh và thân thiện. 
     Hãy trả lời bằng tiếng Việt chuyên nghiệp: ${userMessage}`;
 
@@ -30,7 +31,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ reply: text });
 
   } catch (error) {
-    console.error("Lỗi AI:", error);
+    console.error("Lỗi AI cụ thể:", error);
     return NextResponse.json(
       { reply: "Hệ thống AI đang bận, Jason vui lòng thử lại sau nhé!" },
       { status: 500 }
