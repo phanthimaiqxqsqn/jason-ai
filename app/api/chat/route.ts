@@ -2,8 +2,12 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
 
 // Khởi tạo Google AI với Key bạn đã dán trên Vercel
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY || "");
-
+const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
+if (!apiKey) {
+  console.error("LỖI: Vercel chưa nhận được API Key!");
+}
+const genAI = new GoogleGenerativeAI(apiKey || "");
+////////////////////////
 export async function POST(request: NextRequest) {
   try {
     const body = (await request.json()) as { message?: string };
