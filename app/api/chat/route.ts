@@ -1,9 +1,9 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
 
-// CHUYỂN SANG EDGE RUNTIME CHO CLOUDFLARE
-export const runtime = 'edge'; 
-export const dynamic = 'force-dynamic';
+// GIỮ NGUYÊN SFO1 ĐỂ ĐẢM BẢO CHẠY ĐƯỢC VỚI GOOGLE AI
+export const runtime = 'nodejs'; 
+export const preferredRegion = 'sfo1'; 
 
 const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey || "");
@@ -29,9 +29,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ reply: text });
 
   } catch (error) {
-    console.error("Lỗi AI cụ thể:", error);
+    console.error("Lỗi AI:", error);
     return NextResponse.json(
-      { reply: "Hệ thống AI đang bận, thử lại sau nhé!" },
+      { reply: "Hệ thống AI đang bận, Jason vui lòng thử lại sau nhé!" },
       { status: 500 }
     );
   }
