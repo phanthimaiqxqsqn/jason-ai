@@ -1,9 +1,8 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
 
-// CẤU HÌNH CHO VÙNG SAN FRANCISCO (SFO1)
-export const runtime = 'nodejs';
-export const preferredRegion = 'sfo1';
+// CHUYỂN SANG EDGE RUNTIME CHO CLOUDFLARE
+export const runtime = 'edge'; 
 export const dynamic = 'force-dynamic';
 
 const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
@@ -32,7 +31,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("Lỗi AI cụ thể:", error);
     return NextResponse.json(
-      { reply: "Hệ thống AI đang bận, Jason vui lòng thử lại sau nhé!" },
+      { reply: "Hệ thống AI đang bận, thử lại sau nhé!" },
       { status: 500 }
     );
   }
